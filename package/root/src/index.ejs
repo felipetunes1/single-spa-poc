@@ -40,7 +40,8 @@
       "imports": {
         "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.5.1/lib/system/single-spa.min.js",
         "react": "https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.production.min.js",
-        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.production.min.js"
+        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.production.min.js",
+        "@hdi-seguros/root-config": "/hdi-seguros-root-config.js"
       }
     }
   </script>
@@ -48,20 +49,6 @@
 
   <!-- Add your organization's prod import map URL to this script's src  -->
   <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
-
-  <% if (isLocal) { %>
-  <script type="systemjs-importmap">
-    {
-      "imports": {
-        "@single-spa/welcome": "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
-        "@hdi-seguros/root-config": "//localhost:9000/hdi-seguros-root-config.js",
-        "@hdi-seguros/games-app": "//localhost:9300/hdi-seguros-games-app.js",
-        "@hdi-seguros/nav-menu": "//localhost:9301/hdi-seguros-nav-menu.js",
-        "music-app": "//localhost:4200/main.js"
-      }
-    }
-  </script>
-  <% } %>
 
   <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
@@ -82,30 +69,6 @@
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/extras/named-exports.min.js"></script>
   <% } %>
 
-  <!-- <div id="container"></div> -->
-
-  <template id="single-spa-layout">
-    <single-spa-router>
-      <nav>
-        <application name="@hdi-seguros/nav-menu"></application>
-      </nav>
-      <main>
-        <route path="/container">
-          <route default>
-            <application name="@hdi-seguros/games-app"></application>
-          </route>
-        </route>
-        <route path="/music">
-          <application name="music-app"></application>
-        </route>
-        <route path="/tutorial">
-          <route path="/[0-1]+">
-            <application name="@single-spa/welcome"></application>
-          </route>
-        </route>
-    </main>
-    </single-spa-router>
-  </template>
 </head>
 
 <body>

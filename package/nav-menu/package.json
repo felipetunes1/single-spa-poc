@@ -15,7 +15,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "start": "webpack-dev-server \"--port\" \"9301\"",
+    "start": "webpack-dev-server \"--port\" \"9302\"",
     "build": "webpack --mode=production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
