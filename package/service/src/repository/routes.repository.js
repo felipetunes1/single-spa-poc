@@ -43,7 +43,7 @@ const routes = [
       "elementId": 1,
       "app": "@hdi-seguros/header-app",
       "route": "",
-      "routeExcept": ["/login"],
+      "routeExcept": null,
       "default": false
    },
    {
@@ -59,7 +59,7 @@ const routes = [
       "elementId": 4,
       "app": "@hdi-seguros/footer-app",
       "route": "",
-      "routeExcept": ["/login"],
+      "routeExcept": null,
       "default": false
    },
    {

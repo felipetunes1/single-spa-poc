@@ -1,15 +1,13 @@
 import React from 'react';
 
-import { Navbar, Nav, Form, Button } from "react-bootstrap";
+import { Navbar, Nav, Form, Button, NavDropdown } from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.css'
 
 class Menu extends React.Component {
-  constructor() {
-    super()
-  }
 
   componentDidMount() {
+
     if (!this.props.props.menu.length)
       window.history.pushState(null, null, '/login')
   }
@@ -24,9 +22,14 @@ class Menu extends React.Component {
             ))
           )}
         </Nav>
-        <Form inline>
-          <Button type="submit" variant="light" onClick={() => this.props.props.logout()}>Logout</Button>
-        </Form>
+        <Nav className="text-right">
+          <NavDropdown title={this.props.props.getToken() ? JSON.parse(this.props.props.getToken()).username : ''} id="collasible-nav-dropdown">
+            <NavDropdown.Item action onClick={() => this.props.props.logout()}>Logout</NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+        {/* <Form inline>
+          <Button type="submit" variant="light" >Logout</Button>
+        </Form> */}
       </Navbar>
     )
   }

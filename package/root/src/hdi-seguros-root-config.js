@@ -82,6 +82,7 @@ Promise.all([Elements(), Routes(), App()]).then(([elements, applicationRoutes, a
             },
             logout: function() {
                sessionStorage.clear()
+               window.location = '/'
             }
          }
       )
