@@ -1,0 +1,8 @@
+<h2>Product Details</h2>
+
+<div *ngIf="music">
+  <h3>{{ music.name }}</h3>
+  <h4>{{ music.price | currency }}</h4>
+  <p>{{ music.description }}</p>
+
+</div>

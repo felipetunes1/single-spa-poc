@@ -18,8 +18,6 @@
     This CSP allows any SSL-enabled host, but you should limit these directives further to increase your app's security.
     Learn more about CSP policies at https://content-security-policy.com/#directive
   -->
-  <!-- <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"> -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -50,14 +48,10 @@
   </script>
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.5.5/lib/system/single-spa.min.js" as="script">
 
+  <!-- Foi alterado para a chamada de um serviço que montará os import-map  -->
+  <!-- TODO: como sera feito para desenvolvimento local '-->
   <!-- Add your organization's prod import map URL to this script's src  -->
   <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
-
-  <!--
-    If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
-    Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
-  -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/zone.js@0.10.3/dist/zone.min.js"></script> -->
 
   <% if (isLocal) { %>
   <script id="import-map-overrides"
@@ -67,6 +61,7 @@
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/extras/amd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/extras/named-exports.js"></script>
   <% } else { %>
+  <script src="https://cdn.jsdelivr.net/npm/zone.js@0.10.3/dist/zone.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@1.16.0/dist/import-map-overrides.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/system.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/systemjs@6.4.0/dist/extras/amd.min.js"></script>
@@ -79,10 +74,9 @@
     }
 
     footer {
-      /* position: absolute; */
       right: 0;
       bottom: 0;
-    margin-bottom: 5px;
+      margin-bottom: 5px;
     }
   </style>
 </head>

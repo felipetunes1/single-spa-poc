@@ -11,8 +11,8 @@ import {
    constructLayoutEngine,
 } from "single-spa-layout";
 
-function show(path, location) {
-   const pattern = new RegExp(`^${path}$`);
+function show(regex, location) {
+   const pattern = new RegExp(regex);
    return pattern.test(location.pathname);
 
 }
@@ -65,11 +65,12 @@ Promise.all([Elements(), Routes(), App()]).then(([elements, applicationRoutes, a
          curr.name,
          curr.app,
          function (location) {
+            
             let routeApp = applicationRoutes.find(({ app }) => curr.name == app)
-            let except = routeApp.routeExcept && routeApp.routeExcept.find(path => show(path, location))
-            let notFound = applicationRoutes.find(({ route }) => show(route, location))
+            let except = routeApp.routeExcept && routeApp.routeExcept.find(path => show(`^${path}$`, location))
+            let notFound = applicationRoutes.find(({ route, prefix }) => show(`^${route}${prefix ? '*' : '$'}`, location))
             return ((notFound && routeApp.default) ||
-               show(routeApp.route, location) || routeApp.route == '') && !except
+               show(`^${routeApp.route}${routeApp.prefix ? '*' : '$'}`, location) || routeApp.route == '') && !except
          },
          {
             menu,

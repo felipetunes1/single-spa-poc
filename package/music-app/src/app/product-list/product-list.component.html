@@ -1,0 +1,14 @@
+<h2>Musics</h2>
+
+<div *ngFor="let music of musics; index as musicId">
+   <h3><a [title]="music.name + ' detail'" [routerLink]="['/music', musicId]">{{music.name}}</a></h3>
+   <p *ngIf="music.description">
+      Description: {{music.description}}
+   </p>
+
+   <button (click)="share()">
+      Share
+   </button>
+   <app-product-alerts [music]="music" (notify)="onNotify()">
+   </app-product-alerts>
+</div>
