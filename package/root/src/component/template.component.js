@@ -1,16 +1,21 @@
 export default function (document, routes, elements) {
    let singleSpaRouter = document.createElement('single-spa-router')
-   let header = document.createElement('header')
-   let nav = document.createElement('nav')
-   let main = document.createElement('main')
-   let footer = document.createElement('footer')
+   // let header = document.createElement('header')
+   // let nav = document.createElement('nav')
+   // let main = document.createElement('main')
+   // let footer = document.createElement('footer')
 
-   singleSpaRouter.appendChild(header)
-   singleSpaRouter.appendChild(nav)
-   singleSpaRouter.appendChild(main)
-   singleSpaRouter.appendChild(footer)
+   // singleSpaRouter.appendChild(header)
+   // singleSpaRouter.appendChild(nav)
+   // singleSpaRouter.appendChild(main)
+   // singleSpaRouter.appendChild(footer)
 
    elements.forEach(({ id, name }) => {
+      let element = singleSpaRouter.getElementsByTagName(name)[0];
+      if(!element) {
+         element = document.createElement(name)
+         singleSpaRouter.appendChild(element)
+      }
       routes.filter(({ elementId }) => elementId === id)
          .forEach((route) => {
             let application = document.createElement('application')
@@ -25,10 +30,10 @@ export default function (document, routes, elements) {
                else
                   routeElement.setAttribute('default', '')
 
-               singleSpaRouter.getElementsByTagName(name)[0].appendChild(routeElement)
+               element.appendChild(routeElement)
 
             } else {
-               singleSpaRouter.getElementsByTagName(name)[0].appendChild(application)
+               element.appendChild(application)
 
             }
          })

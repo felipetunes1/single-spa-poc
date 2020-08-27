@@ -4,7 +4,7 @@ const singleSpaDefaults = require("webpack-config-single-spa-react");
 module.exports = (webpackConfigEnv) => {
   const defaultConfig = singleSpaDefaults({
     orgName: "hdi-seguros",
-    projectName: "header-app",
+    projectName: "login-app",
     webpackConfigEnv,
   });
 

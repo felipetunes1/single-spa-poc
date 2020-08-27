@@ -1,5 +1,8 @@
 import React from 'react';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.css'
+
+import { Jumbotron, Container, Row, Col, Button, ListGroup } from "react-bootstrap";
 
 function calculateWinner(squares) {
    const lines = [
@@ -15,7 +18,7 @@ function calculateWinner(squares) {
    for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-         return { player : squares[a], line : lines[i] };
+         return { player: squares[a], line: lines[i] };
       }
    }
    return null;
@@ -28,7 +31,7 @@ function calculateDraw(squares) {
 
 function Square(props) {
    return (
-      <button className="square" onClick={props.onClick} style={{color: props.winner ? 'red' : 'black'}}>
+      <button className="square" onClick={props.onClick} style={{ color: props.winner ? 'red' : 'black' }}>
          {props.value}
       </button>
    );
@@ -128,9 +131,8 @@ class Game extends React.Component {
       const moves = history.map((step, move) => {
          const desc = `GO TO ${move ? "MOVE $" + move + " - " + step.position : "START"}`;
          return (
-            <li key={move}>
-               <button onClick={() => this.jumpTo(move)} style={{fontWeight : move === this.state.stepNumber ? "bold" : "normal"}}>{desc}</button>
-            </li>
+            <ListGroup.Item key={move} onClick={() => this.jumpTo(move)} style={{ fontWeight: move === this.state.stepNumber ? "bold" : "normal" }}>{desc}
+            </ListGroup.Item>
          );
       });
 
@@ -141,33 +143,42 @@ class Game extends React.Component {
             `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
 
       return (
-         <div className="game">
-            <div className="game-board">
-               <Board
-                  squares={current.squares}
-                  winner={winner ? winner.line : []}
-                  onClick={(i, pos) => this.handleClick(i, pos)}
-               />
-            </div>
-            <div className="game-info">
-               <div>{status}</div>
-               <div>
-                  <button onClick={() => this.reOrder()}>Reorder</button>
-               </div>
-               <ol>{this.state.asc ? moves : moves.reverse()}</ol>
-            </div>
-         </div>
+         <Container>
+            <Row>
+               <Col>
+               </Col>
+               <Col>{status}</Col>
+               <Col></Col>
+            </Row>
+            <Row>
+               <Col>
+                  <ListGroup.Item>
+                     <Button onClick={() => this.reOrder()}>Reorder</Button>
+                  </ListGroup.Item>
+                  {this.state.asc ? moves : moves.reverse()}
+
+               </Col>
+               <Col>
+                  <Board
+                     squares={current.squares}
+                     winner={winner ? winner.line : []}
+                     onClick={(i, pos) => this.handleClick(i, pos)}
+                  />
+               </Col>
+               <Col></Col>
+            </Row>
+         </Container>
       );
    }
 }
 
 // ========================================
 export default function Root(props) {
-  return (
-    <section>
-      <h1>App Games</h1>
-      <Game />
-    </section>
-  );
+   return (
+      <Container>
+         <Jumbotron><h3>App Games</h3></Jumbotron>
+         <Game />
+      </Container>
+   );
 }
 
