@@ -5,7 +5,7 @@ import { musics } from "../musics";
 
 @Component({
   selector: 'app-product-details',
-  templateUrl: './product-details.component.html']
+  templateUrl: './product-details.component.html'
 })
 export class ProductDetailsComponent implements OnInit {
   music;
@@ -16,6 +16,10 @@ export class ProductDetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.music = musics[+params.get('musicId')]
     })
+  }
+
+  click() {
+    alert("Like Like Like Like Like")
   }
 
 }

@@ -37,8 +37,13 @@ class Menu extends React.Component {
 }
 
 export default function Root(props) {
-  return (
-    <Menu props={props} />
-  );
+  if(props.validaToken()) {
+    return (
+      <Menu props={props} />
+    );
+  } else {
+    return false;
+  }
+  
 }
 

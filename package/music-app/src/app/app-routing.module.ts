@@ -6,8 +6,8 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { ProductDetailsComponent } from './product-details/product-details.component';
 
 const routes: Routes = [
-  { path: '', component: ProductListComponent },
-  { path: ':musicId', component: ProductDetailsComponent },
+  { path: 'music/:musicId', component: ProductDetailsComponent },
+  { path: 'music', component: ProductListComponent },
   { path: '**', component: EmptyRouteComponent }
 ];
 
@@ -15,7 +15,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/music' },
+    { provide: APP_BASE_HREF, useValue: '/' },
   ]
 })
 export class AppRoutingModule { }

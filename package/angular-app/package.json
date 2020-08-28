@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --disable-host-check --port 4300 --deploy-url http://localhost:4300/ --live-reload false",
+    "start": "ng serve --disable-host-check --port 4300 --deploy-url http://localhost:4300/ --base-href music/teste --live-reload false",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

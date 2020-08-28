@@ -18,7 +18,6 @@ const AppContent = ({
    handleRepos,
    handleStarred }) => (
       <Container>
-
          {<Search handleSearch={handleSearch} />}
 
          {!!userinfo &&

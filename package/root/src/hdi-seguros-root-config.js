@@ -11,6 +11,8 @@ import {
    constructLayoutEngine,
 } from "single-spa-layout";
 
+import 'bootstrap/dist/css/bootstrap.css'
+
 function show(regex, location) {
    const pattern = new RegExp(regex);
    return pattern.test(location.pathname);
@@ -19,7 +21,7 @@ function show(regex, location) {
 
 function insertNewImportMap(newMapJSON) {
    let newScript = document.getElementById('hdi-seguros-systemjs-importmap')
-   if(newScript)
+   if (newScript)
       newScript.parentNode.removeChild(newScript);
 
    newScript = document.createElement('script')
@@ -65,25 +67,31 @@ Promise.all([Elements(), Routes(), App()]).then(([elements, applicationRoutes, a
          curr.name,
          curr.app,
          function (location) {
-            
+
             let routeApp = applicationRoutes.find(({ app }) => curr.name == app)
             let except = routeApp.routeExcept && routeApp.routeExcept.find(path => show(`^${path}$`, location))
             let notFound = applicationRoutes.find(({ route, prefix }) => show(`^${route}${prefix ? '*' : '$'}`, location))
+            console.log(routeApp.route, ((notFound && routeApp.default) ||
+               show(`^${routeApp.route}${routeApp.prefix ? '*' : '$'}`, location) || routeApp.route == '') && !except)
             return ((notFound && routeApp.default) ||
                show(`^${routeApp.route}${routeApp.prefix ? '*' : '$'}`, location) || routeApp.route == '') && !except
          },
          {
             menu,
             auth,
+            sessionID: "id",
             functToken: function (res) {
                sessionStorage.setItem('sessionTeste', JSON.stringify(res))
             },
             getToken: function () {
                return sessionStorage.getItem('sessionTeste')
             },
-            logout: function() {
+            logout: function () {
                sessionStorage.clear()
                window.location = '/'
+            },
+            validaToken: function () {
+               return true
             }
          }
       )
